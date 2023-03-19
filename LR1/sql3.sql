@@ -1,0 +1,28 @@
+SET SERVEROUTPUT ON SIZE UNLIMITED;
+DECLARE
+ans CHAR(5);
+FUNCTION odd_or_even RETURN CHAR IS
+even INTEGER;
+odd INTEGER;
+BEGIN
+SELECT COUNT(*) INTO odd FROM MyTable2 WHERE MOD(val, 2) <> 0;
+DBMS_OUTPUT.PUT_LINE('ODD: '||odd);
+SELECT COUNT(*) INTO even FROM MyTable2 WHERE MOD(val, 2) = 0;
+DBMS_OUTPUT.PUT_LINE('EVEN: '||even);
+IF even > odd 
+THEN RETURN 'TRUE'; 
+END IF;
+IF even < odd THEN
+RETURN 'FALSE';
+END IF;
+IF even = odd THEN 
+RETURN 'EQUAL';
+END IF;
+RETURN 'ASD';
+END odd_or_even;
+BEGIN
+ans := odd_or_even();
+DBMS_OUTPUT.PUT_LINE(ans);
+END;
+
+SELECT * FROM MyTable2;
