@@ -8,7 +8,6 @@ counter number;
 BEGIN
 IF :new.id IS NOT NULL THEN
 select count(*) as c into counter
-
 from students
 where id = :new.id;
 IF counter > 0 THEN
@@ -27,3 +26,23 @@ where id = :new.id;
 END LOOP;
 END IF;
 END;
+
+
+
+
+create or replace trigger GroupUniqueId
+    before insert on groups
+    for each row
+declare
+    custom_exception exception;
+    pragma exception_init(custom_exception, -20042);
+    cursor Group_id is
+        select id from groups;
+begin
+    for ug_id in Group_id
+    loop
+        if (ug_id.id = :new.id) then
+            raise_application_error(-20042, 'id must be unique!');
+        end if;
+    end loop;
+end;
