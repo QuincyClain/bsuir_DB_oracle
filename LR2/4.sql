@@ -27,7 +27,7 @@ INSERT INTO LOGGING_ACTIONS VALUES(TEMP_ID, 'UPDATE', SYSTIMESTAMP,
 :old.id, :old.name, :old.group_id, :new.id, :new.name, :new.group_id);
 END IF;
 IF DELETING THEN
-INSERT INTO LOGGING_ACTIONS VALUES(TEMP_ID, 'delete', SYSTIMESTAMP, :old.id,
+INSERT INTO LOGGING_ACTIONS VALUES(TEMP_ID, 'DELETE', SYSTIMESTAMP, :old.id,
 :old.name, :old.group_id, NULL, NULL, NULL);
 END IF;
 END;

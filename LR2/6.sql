@@ -23,3 +23,5 @@ SET C_VAL = C_VAL - 1
 WHERE id = :old.group_id;
 END IF;
 END;
+
+DROP trigger c_val_update;
